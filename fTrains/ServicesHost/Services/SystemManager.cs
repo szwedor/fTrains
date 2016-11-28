@@ -15,7 +15,7 @@ namespace ServicesHost.Services
     {
         
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void UpdateStation(Station station)
+        public void UpdateStation(Station station)// jako add
         {
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {

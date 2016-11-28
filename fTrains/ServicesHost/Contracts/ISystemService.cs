@@ -8,7 +8,7 @@ namespace ServicesHost.Contracts
     public interface ISystemService
     {
         [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
+        [TransactionFlow(TransactionFlowOption.Allowed)]// bo na bazie
         void UpdateStation(Station station);
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
