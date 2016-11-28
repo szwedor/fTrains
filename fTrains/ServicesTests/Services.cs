@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DomainModel.Models;
-using ServicesHost.Contracts;
+using Proxies.Contracts;
 
 namespace ServicesTests
 {
@@ -15,13 +15,13 @@ namespace ServicesTests
             ChannelFactory<ISystemService> channelFactory =
            new ChannelFactory<ISystemService>("");
             ISystemService proxy = channelFactory.CreateChannel();
-
+            
             
             ((ICommunicationObject) proxy).Open();
 
             Station s = new Station()
             {
-                Name = "LOL",Id = 33
+                Name = "Lsa"
             };
             proxy.UpdateStation(s);
             

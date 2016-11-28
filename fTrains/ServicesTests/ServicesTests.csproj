@@ -70,9 +70,9 @@
       <Project>{7B427894-3D45-48EF-B6C6-265ED2010305}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServicesHost\ServicesHost.csproj">
-      <Project>{05fc442b-b9e6-4e76-9f90-4ad2315763eb}</Project>
-      <Name>ServicesHost</Name>
+    <ProjectReference Include="..\Proxies\Proxies.csproj">
+      <Project>{5d4fa127-e801-4896-8e68-8c0fcff42a38}</Project>
+      <Name>Proxies</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
