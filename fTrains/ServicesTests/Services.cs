@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DomainModel.Models;
-using Proxies.Contracts;
+using ServicesHost.Contracts;
 
 namespace ServicesTests
 {
