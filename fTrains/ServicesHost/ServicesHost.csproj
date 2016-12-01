@@ -53,11 +53,13 @@
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Contracts\IStationManagment.cs" />
     <Compile Include="Contracts\ISystemService.cs" />
     <Compile Include="Contracts\ITicketService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\StationManagment.cs" />
     <Compile Include="Services\SystemManager.cs" />
     <Compile Include="Services\TicketManager.cs" />
     <Compile Include="Services\UserManager.cs" />

@@ -17,6 +17,9 @@ namespace DomainModel
         void Add(T entity);
         void Attach(T entity);
         void Delete(T entity);
+        IEnumerable<T> Find(Func<T, bool> predicate);
+        IEnumerable<T> Find(Func<T, bool> func, params string[] included);
+        IEnumerable<T> Find(Func<T, int, bool> predicate, params string[] included);
     }
    
 }
