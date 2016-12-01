@@ -10,7 +10,7 @@ namespace ServicesHost.Contracts
     {
         
         [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
+        [TransactionFlow(TransactionFlowOption.Allowed)]//komentarz
         List<Ticket> MakeReservation(List<Connection> connections, User user,int no=1,Ticket.Discount discount=Ticket.Discount.Without);
         [OperationContract]
         List<List<Connection>> FindRoute(Station stationDeparture, Station stationArrival, DateTime dateTimeDeparture);// tu nie ma flow bo nie ma na bazie 
