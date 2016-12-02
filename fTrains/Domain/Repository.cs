@@ -32,35 +32,23 @@ namespace Domain
             _set.Remove(entity);
         }
 
-        public IEnumerable<T> Find(Func<T, bool> predicate)
+        public IEnumerable<T> Find(Func<T, bool> predicate, params Expression<Func<T, object>>[] includes)
         {
-            throw new NotImplementedException();
+           IQueryable<T> query = _set;
+            foreach (var includeExpression in includes)
+            {
+                query = query.Include(includeExpression);
+            }
+
+            return query.Where(predicate);
         }
 
-        public IEnumerable<T> Find(Func<T, bool> func, params string[] included)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<T> Find(Func<T, int, bool> predicate, params string[] included)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+  
         public T Get(Func<T, bool> predicate)
         {
             return _set.Find(predicate);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate = null)
-        {
-            if (predicate != null) return _set.Where(predicate);
-            return _set;
-        }
+      
     }
 }

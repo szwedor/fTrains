@@ -43,8 +43,8 @@ namespace WcfServiceLibrary.Services
 
                 var cd = u.ConnectionDefinitionRepository.Find(p => p.IsArchival != true &&
                                                                                  p.Departure.Id == departure.Id &&
-                                                                                 p.Arrival.Id == arrival.Id, "Departure",
-                        "Arrival").Select(p => p.Id).ToList();
+                                                                                 p.Arrival.Id == arrival.Id, p=>p.Departure,
+                        p=>p.Arrival).Select(p => p.Id).ToList();
                 _connections =
                      u.ConnectionsRepository.Find((t) => cd.Contains(t.ConnectionDefinition.Id) && t.DepartureTime > date && t.DepartureTime < dend).ToList();
 
@@ -111,7 +111,7 @@ namespace WcfServiceLibrary.Services
                 int seat = -1;
                 u.StartTransaction();
                 
-                    var x = u.ConnectionsRepository.Find(p => p.Id == con.Id, "ConnectionDefinition").ToList().First();
+                    var x = u.ConnectionsRepository.Find(p => p.Id == con.Id,p=>p.ConnectionDefinition).ToList().First();
                     if (x.ConnectionDefinition.IsArchival || x.AvailableSeatNo == 0)
                     {
 

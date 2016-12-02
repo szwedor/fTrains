@@ -32,6 +32,7 @@ namespace WcfServiceLibrary.Services
                 s.Name = newStationText;
                 s.IsArchival = false;
                 u.StationsRepository.Add(s);
+                u.Save();
                 u.EndTransaction();
                 return true;
             }

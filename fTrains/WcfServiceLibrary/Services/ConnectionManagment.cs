@@ -40,7 +40,7 @@ namespace WcfServiceLibrary.Services
                 u.StartTransaction();
                 {
                     //Dodanie pociągu jest niezdefinowane w wymaganiach wieć na razie każde połącznie korzysta z pierwszego;
-                    ConnectionDefinition.Train = u.TrainsRepository.Get(1);
+                    ConnectionDefinition.Train = u.TrainsRepository.Get(p=>p.Id== 1);
                     u.StationsRepository.Attach(departureStation);
                     u.StationsRepository.Attach(arrivalStation);
                     u.ConnectionDefinitionRepository.Add(ConnectionDefinition);
@@ -76,7 +76,7 @@ namespace WcfServiceLibrary.Services
                         u.StationsRepository.Attach(departure);
                     if (arrival != null)
                         u.StationsRepository.Attach(arrival);
-                    cd = u.ConnectionDefinitionRepository.Find(find, "Arrival", "Departure", "Train").ToList();
+                    cd = u.ConnectionDefinitionRepository.Find(find, p=>p.Arrival, p=>p.Departure, p=>p.Train).ToList();
                 u.Save();
                 u.EndTransaction();
             }
