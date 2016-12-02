@@ -20,7 +20,7 @@ namespace DomainModel
         IEnumerable<T> Find(Func<T, bool> predicate);
         IEnumerable<T> Find(Func<T, bool> func, params string[] included);
         IEnumerable<T> Find(Func<T, int, bool> predicate, params string[] included);
-        object Get(int id);
+        T Get(int id);
     }
    
 }
