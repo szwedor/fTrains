@@ -65,13 +65,17 @@ namespace ServicesHost.Services
                 hou = p => p.TravelTime.Hours == hour;
             Func<ConnectionDefinition, bool> find = p => dep(p) && arr(p) & pr(p) && hou(p) && p.IsArchival == false;
 
-
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
-                if (departure != null)
-                    u.StationsRepository.Atached(departure);
-                if (arrival != null)
-                    u.StationsRepository.Atached(arrival);
-                cd = u.ConnectionDefinitionRepository.Find(find, "Arrival", "Departure", "Train").ToList();
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
+                u.StartTransaction();
+                    if (departure != null)
+                        u.StationsRepository.Attach(departure);
+                    if (arrival != null)
+                        u.StationsRepository.Attach(arrival);
+                    cd = u.ConnectionDefinitionRepository.Find(find, "Arrival", "Departure", "Train").ToList();
+                u.Save();
+                u.EndTransaction();
             }
             return cd;
         }
@@ -90,35 +94,43 @@ namespace ServicesHost.Services
                 TravelTime = cd.TravelTime
             };
 
-            u.StartTransaction();
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
+                u.StartTransaction();
+                {
 
-                u.StationsRepository.Atached(cd.Arrival);
-                u.StationsRepository.Atached(cd.Departure);
-                u.ConnectionDefinitionRepository.Atached(cd);
-                cd.IsArchival = true;
-                u.StationsRepository.Atached(cdl.Arrival);
-                u.StationsRepository.Atached(cdl.Departure);
-                u.TrainsRepository.Atached(cd.Train);
-                u.ConnectionDefinitionRepository.Add(cdl);
-                u.EndTransaction();
+                    u.StationsRepository.Attach(cd.Arrival);
+                    u.StationsRepository.Attach(cd.Departure);
+                    u.ConnectionDefinitionRepository.Attach(cd);
+                    cd.IsArchival = true;
+                    u.StationsRepository.Attach(cdl.Arrival);
+                    u.StationsRepository.Attach(cdl.Departure);
+                    u.TrainsRepository.Attach(cd.Train);
+                    u.ConnectionDefinitionRepository.Add(cdl);
+                    u.Save();
+                    u.EndTransaction();
+                }
             }
             return true;
         }
         [OperationBehavior(TransactionScopeRequired = true)]
         public bool MakeArchival(ConnectionDefinition cd)
         {
-
-
-            u.StartTransaction();
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
+                u.StartTransaction();
+                {
 
-                u.StationsRepository.Atached(cd.Arrival);
-                u.StationsRepository.Atached(cd.Departure);
-                u.ConnectionDefinitionRepository.Atached(cd);
-                cd.IsArchival = true;
-                u.TrainsRepository.Atached(cd.Train);
-                u.EndTransaction();
+                    u.StationsRepository.Attach(cd.Arrival);
+                    u.StationsRepository.Attach(cd.Departure);
+                    u.ConnectionDefinitionRepository.Attach(cd);
+                    cd.IsArchival = true;
+                    u.TrainsRepository.Attach(cd.Train);
+                    u.Save();
+                    u.EndTransaction();
+                }
             }
             return true;
         }
@@ -141,19 +153,22 @@ namespace ServicesHost.Services
                 };
                 c.Add(connection);
             }
-
-            u.StartTransaction();
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
-                u.ConnectionDefinitionRepository.Atached(connectionDefinition);
-                u.TrainsRepository.Atached(connectionDefinition.Train);
-                foreach (var con in c)
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
+                u.StartTransaction();
                 {
-                    u.ConnectionsRepository.Add(con);
+                    u.ConnectionDefinitionRepository.Attach(connectionDefinition);
+                    u.TrainsRepository.Attach(connectionDefinition.Train);
+                    foreach (var con in c)
+                    {
+                        u.ConnectionsRepository.Add(con);
+                    }
+                    u.EndTransaction();
                 }
-                u.EndTransaction();
             }
             return true;
         }
     }
 }
-}
+
