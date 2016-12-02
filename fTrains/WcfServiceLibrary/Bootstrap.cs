@@ -7,7 +7,7 @@ namespace WcfServiceLibrary
 {
     public class Bootstrap
     {
-        public static IContainer BuildContainer()
+        public static IContainer BuildContainer()//4
         {
             var builder = new ContainerBuilder();
 
