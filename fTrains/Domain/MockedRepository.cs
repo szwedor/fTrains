@@ -33,5 +33,25 @@ namespace Domain
         {
             ll.Remove(entity);
         }
+
+        public IEnumerable<T> Find(Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> Find(Func<T, bool> func, params string[] included)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> Find(Func<T, int, bool> predicate, params string[] included)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
