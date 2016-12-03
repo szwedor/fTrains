@@ -8,30 +8,29 @@ namespace Domain
 {
     public class MockedRepository<T> : IRepository<T> where T : Entity
     {
-        private List<T> ll = new List<T>();
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate = null)
-        {
-            return ll;
-        }
-
-        public T Get(Func<T, bool> predicate)
-        {
-            return ll.FirstOrDefault(predicate);
-        }
-
         public void Add(T entity)
         {
-            ll.Add(entity);
+            throw new NotImplementedException();
         }
 
         public void Attach(T entity)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void Delete(T entity)
         {
-            ll.Remove(entity);
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> Find(Func<T, bool> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get(Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }
