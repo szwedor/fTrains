@@ -61,8 +61,6 @@
     <Compile Include="Services\ConnectionManagment.cs" />
     <Compile Include="Services\ReservationManagment.cs" />
     <Compile Include="Services\StationManagment.cs" />
-    <Compile Include="Services\TicketManager.cs" />
-    <Compile Include="Services\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
