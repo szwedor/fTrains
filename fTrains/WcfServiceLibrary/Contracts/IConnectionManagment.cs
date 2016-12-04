@@ -14,6 +14,8 @@ namespace WcfServiceLibrary.Contracts
         [OperationContract]
         List<ConnectionDefinition> Find(Station departure, Station arrival, int price, int hour);
         [OperationContract]
+        List<ConnectionDefinition> AllConnections();
+        [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         bool UpdateConnection(ConnectionDefinition cd);
         [OperationContract]

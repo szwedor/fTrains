@@ -50,7 +50,17 @@ namespace WcfServiceLibrary.Services
             }
             return true;
         }
+        public List<ConnectionDefinition> AllConnections()
+        {
+            List<ConnectionDefinition> s;
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
+            {
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
+                s = u.ConnectionDefinitionRepository.Find(p => p.Id > 0).ToList();
 
+            }
+            return s;
+        }
         public List<ConnectionDefinition> Find(Station departure, Station arrival, int price, int hour)
         {
             List<ConnectionDefinition> cd;
