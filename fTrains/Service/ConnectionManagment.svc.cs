@@ -5,19 +5,19 @@ using System.ServiceModel;
 using Autofac;
 using DomainModel;
 using DomainModel.Models;
-using WcfServiceLibrary.Contracts;
+using Service.App_Data.Contracts;
 
-namespace WcfServiceLibrary.Services
+namespace Service
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
                   ConcurrencyMode = ConcurrencyMode.Multiple,
                   ReleaseServiceInstanceOnTransactionComplete = false)]
-    public class ConnectionManagment: IConnectionManagment
+    public class ConnectionManagment : IConnectionManagment
 
     {
         public ConnectionManagment()
         {
-         
+
             Bootstrap.BuildContainer();
         }
         [OperationBehavior(TransactionScopeRequired = true)]
@@ -40,7 +40,7 @@ namespace WcfServiceLibrary.Services
                 u.StartTransaction();
                 {
                     //Dodanie pociągu jest niezdefinowane w wymaganiach wieć na razie każde połącznie korzysta z pierwszego;
-                    ConnectionDefinition.Train = u.TrainsRepository.Get(p=>p.Id== 1);
+                    ConnectionDefinition.Train = u.TrainsRepository.Get(p => p.Id == 1);
                     u.StationsRepository.Attach(departureStation);
                     u.StationsRepository.Attach(arrivalStation);
                     u.ConnectionDefinitionRepository.Add(ConnectionDefinition);
@@ -86,7 +86,7 @@ namespace WcfServiceLibrary.Services
                 //        u.StationsRepository.Attach(departure);
                 //    if (arrival != null)
                 //        u.StationsRepository.Attach(arrival);
-                cd = u.ConnectionDefinitionRepository.Find(find, p=>p.Arrival, p=>p.Departure, p=>p.Train).ToList();
+                cd = u.ConnectionDefinitionRepository.Find(find, p => p.Arrival, p => p.Departure, p => p.Train).ToList();
                 u.Save();
                 u.EndTransaction();
             }
