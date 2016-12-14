@@ -45,8 +45,9 @@ namespace Service
             }
         }
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void Login(string userName, string pass)
+        public void Login()
         {
+
         }
 
     }

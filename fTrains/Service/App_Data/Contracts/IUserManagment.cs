@@ -5,6 +5,7 @@ using DomainModel.Models;
 
 namespace Service.App_Data.Contracts
 {
+    
     [ServiceContract]
     public interface IUserManagmentUnsecure
     {
@@ -12,11 +13,11 @@ namespace Service.App_Data.Contracts
         void AddUser(User a);
     }
     [ServiceContract]
-    public interface IUserManagment : IReservationManagmentUnsecure
+    public interface IUserManagment : IUserManagmentUnsecure
     {
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void Login(string login, string pass);
+        void Login();
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void ChangePass(string login, string oldpass, string newpass);
