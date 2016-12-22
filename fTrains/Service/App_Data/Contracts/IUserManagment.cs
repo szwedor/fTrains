@@ -11,6 +11,8 @@ namespace Service.App_Data.Contracts
     {
         [OperationContract]
         void AddUser(User a);
+        [OperationContract]
+        bool IsEmailInDB(string userName);
     }
     [ServiceContract]
     public interface IUserManagment : IUserManagmentUnsecure
@@ -20,6 +22,9 @@ namespace Service.App_Data.Contracts
         void Login();
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void ChangePass(string login, string oldpass, string newpass);
+        void ChangePass(string login, string newpass);
+
+        
+
     }
 }

@@ -5,7 +5,7 @@ using DomainModel.Models;
 
 namespace Domain
 {
-    public class Init : CreateDatabaseIfNotExists<TrainContext>
+    public class Init : DropCreateDatabaseIfModelChanges<TrainContext>
     {
         protected override void Seed(TrainContext context)
         {
@@ -27,7 +27,7 @@ namespace Domain
             //Configuration.ValidateOnSaveEnabled = false;
             var ensureDllIsCopied =
                 System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-            //    Database.SetInitializer<TrainContext>(new Init());
+               Database.SetInitializer<TrainContext>(new Init());
             //    Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
 
         }
