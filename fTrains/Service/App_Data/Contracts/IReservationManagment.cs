@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using DomainModel.Models;
+using System.Runtime.Serialization;
 
 namespace Service.App_Data.Contracts
 {
+   
     [ServiceContract]
     public interface IReservationManagmentUnsecure
     {

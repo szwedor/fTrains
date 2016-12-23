@@ -107,8 +107,10 @@ namespace Service
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
-                return u.TicketsRepository.Find(p => p.User.Email == userName).ToList();
+             return u.TicketsRepository.Find(p => p.User.Email == userName,r=>r.User, r => r.Connection,r=>r.Connection.ConnectionDefinition,r=>r.Connection.ConnectionDefinition.Arrival,r=>r.Connection.ConnectionDefinition.Departure).ToList();
                 
+            
+               
             }
         }
     }
