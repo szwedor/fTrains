@@ -52,7 +52,7 @@ namespace Service
             return LofConn;
         }
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void MakeReservation(Connection con, string userName)
+        public int MakeReservation(Connection con, string userName)
         {
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
@@ -65,17 +65,18 @@ namespace Service
                     Ticket ticket = new Ticket();
                     ticket.Connection = x;
                     ticket.User = _user;
-                    u.UsersRepository.Attach(_user);
-                    u.TicketsRepository.Add(ticket);
+                    
 
                     if (x.AvailableSeatNo != 0) ticket.Seat = x.AvailableSeatNo;
                     else ticket.Seat = -1;
 
                     x.AvailableSeatNo--;
+                    u.UsersRepository.Attach(_user);
+                    u.TicketsRepository.Add(ticket);
                     u.Save();
                     u.EndTransaction();
-                
 
+                return ticket.Seat;
             }
         }
         [OperationBehavior(TransactionScopeRequired = true)]
