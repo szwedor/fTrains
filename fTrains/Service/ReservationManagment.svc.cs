@@ -29,8 +29,10 @@ namespace Service
                 return u.StationsRepository.Find(p => p.IsArchival == false).ToList();
             }
         }
-        public List<Connection> FindConnection(Station departure, Station arrival, DateTime date)
+        public List<List<Connection>> FindConnection(Station departure, Station arrival, DateTime date)
         {
+            List<List<Connection>> LofConn = new List<List<Connection>>();
+            List<Connection> oneconn=new List<Connection>();
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
@@ -41,8 +43,13 @@ namespace Service
                                                                                  p.Departure.Id == departure.Id &&
                                                                                  p.Arrival.Id == arrival.Id, p => p.Departure,
                         p => p.Arrival).Select(p => p.Id).ToList();
-                return u.ConnectionsRepository.Find((t) => cd.Contains(t.ConnectionDefinition.Id) && t.DepartureTime > date && t.DepartureTime < dend).ToList();
+                oneconn=u.ConnectionsRepository.Find((t) => cd.Contains(t.ConnectionDefinition.Id) && t.DepartureTime > date && t.DepartureTime < dend).ToList();
+                if(oneconn.Count!=0)
+                {
+                    LofConn.Add(oneconn);
+                }
             }
+            return LofConn;
         }
         [OperationBehavior(TransactionScopeRequired = true)]
         public void MakeReservation(Connection con, string userName)

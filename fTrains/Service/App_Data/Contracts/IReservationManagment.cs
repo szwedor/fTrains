@@ -11,7 +11,7 @@ namespace Service.App_Data.Contracts
         [OperationContract]
         List<Station> AllStations();
         [OperationContract]
-        List<Connection> FindConnection(Station departure, Station arrival, DateTime date);
+        List<List<Connection>> FindConnection(Station departure, Station arrival, DateTime date);
     }
     [ServiceContract]
     public interface IReservationManagment:IReservationManagmentUnsecure
