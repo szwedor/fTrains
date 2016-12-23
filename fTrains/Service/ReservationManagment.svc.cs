@@ -29,10 +29,8 @@ namespace Service
                 return u.StationsRepository.Find(p => p.IsArchival == false).ToList();
             }
         }
-        public List<List<Connection>> FindConnection(Station departure, Station arrival, DateTime date)
+        public List<Connection> FindConnection(Station departure, Station arrival, DateTime date)
         {
-            List<Connection> _connections;
-            List<List<Connection>> LofC = new List<List<Connection>>();
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
@@ -43,29 +41,22 @@ namespace Service
                                                                                  p.Departure.Id == departure.Id &&
                                                                                  p.Arrival.Id == arrival.Id, p => p.Departure,
                         p => p.Arrival).Select(p => p.Id).ToList();
-                _connections =
-                     u.ConnectionsRepository.Find((t) => cd.Contains(t.ConnectionDefinition.Id) && t.DepartureTime > date && t.DepartureTime < dend).ToList();
-                if (_connections.Count() != 0) LofC.Add(_connections);
+                return u.ConnectionsRepository.Find((t) => cd.Contains(t.ConnectionDefinition.Id) && t.DepartureTime > date && t.DepartureTime < dend).ToList();
             }
-
-            return LofC;
         }
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void MakeReservation(List<Connection> ListofConn, string userName)
+        public void MakeReservation(Connection con, string userName)
         {
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
                 u.StartTransaction();
 
-                foreach (var con in ListofConn)
-                {
-                    var x = u.ConnectionsRepository.Find(p => p.Id == con.Id, p => p.ConnectionDefinition).ToList().First();
+                var x = u.ConnectionsRepository.Find(p => p.Id == con.Id, p => p.ConnectionDefinition).ToList().First();
                     var _user = u.UsersRepository.Find(p => p.Email == userName.ToLower()).ToList().First();
 
                     Ticket ticket = new Ticket();
-                    ticket.Connection = new List<Connection>();
-                    ticket.Connection.Add(x);
+                    ticket.Connection = x;
                     ticket.User = _user;
                     u.UsersRepository.Attach(_user);
                     u.TicketsRepository.Add(ticket);
@@ -76,31 +67,29 @@ namespace Service
                     x.AvailableSeatNo--;
                     u.Save();
                     u.EndTransaction();
-                }
+                
 
             }
         }
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void DeleteReservation(string userName, List<Connection> ListofConn)
+        public void DeleteReservation(string userName, Connection con)
         {
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
                 u.StartTransaction();
 
-                foreach (var con in ListofConn)
-                {
-                    var x = u.ConnectionsRepository.Find(p => p.Id == con.Id, p => p.ConnectionDefinition).ToList().First();
-                    var _user = u.UsersRepository.Find(p => p.Email == userName.ToLower()).ToList().First();
-                    var ticket = u.TicketsRepository.Find(p => p.Connection == ListofConn, p => p.User.Email == _user.Email).ToList().First();
+                var x = u.ConnectionsRepository.Find(p => p.Id == con.Id, p => p.ConnectionDefinition).ToList().First();
+                var _user = u.UsersRepository.Find(p => p.Email == userName.ToLower()).ToList().First();
+                var ticket = u.TicketsRepository.Find(p => p.Connection == con, p => p.User.Email == _user.Email).ToList().First();
 
-                    u.TicketsRepository.Attach(ticket);
-                    u.TicketsRepository.Delete(ticket);
+                u.TicketsRepository.Attach(ticket);
+                u.TicketsRepository.Delete(ticket);
                     
-                    x.AvailableSeatNo++;
-                    u.Save();
-                    u.EndTransaction();
-                }
+                x.AvailableSeatNo++;
+                u.Save();
+                u.EndTransaction();
+                
             }
         }
         [OperationBehavior(TransactionScopeRequired = true)]

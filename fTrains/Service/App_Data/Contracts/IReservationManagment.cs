@@ -11,17 +11,17 @@ namespace Service.App_Data.Contracts
         [OperationContract]
         List<Station> AllStations();
         [OperationContract]
-        List<List<Connection>> FindConnection(Station departure, Station arrival, DateTime date);
+        List<Connection> FindConnection(Station departure, Station arrival, DateTime date);
     }
     [ServiceContract]
     public interface IReservationManagment:IReservationManagmentUnsecure
     {
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void MakeReservation(List<Connection> con, string userName);
+        void MakeReservation(Connection con, string userName);
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void DeleteReservation(string userName, List<Connection> ListofConn);
+        void DeleteReservation(string userName, Connection con);
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         List<Ticket> AllUserReservations(string userName);
