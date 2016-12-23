@@ -18,7 +18,7 @@ namespace Service.App_Data.Contracts
     {
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void MakeReservation(Connection con, string userName);
+        int MakeReservation(Connection con, string userName);
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void DeleteReservation(string userName, Connection con);
