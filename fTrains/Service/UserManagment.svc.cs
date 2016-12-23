@@ -46,16 +46,16 @@ namespace Service
         
         public bool IsEmailInDB(string userName)
         {
-            User _user;
-
+            //User _user;
+            List<User> x = new List<User>();
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
                 {
-                    _user = u.UsersRepository.Find(p => p.Email == userName.ToLower()).ToList().First();
+                    x = u.UsersRepository.Find(p => p.Email == userName.ToLower()).ToList();
                 }
             }
-            return _user != null;
+            return x.Count() != 0;
         }
         [OperationBehavior(TransactionScopeRequired = true)]
         public void ChangePass(string login,string newpass)
