@@ -29,6 +29,14 @@ namespace Service
                 return u.StationsRepository.Find(p => p.IsArchival == false).ToList();
             }
         }
+        public int AllTickets()
+        {
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
+            {
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
+                return u.TicketsRepository.Find(p => p.Id>0).ToList().Count();
+            }
+        }
         public List<List<Connection>> FindConnection(Station departure, Station arrival, DateTime date)
         {
             List<List<Connection>> LofConn = new List<List<Connection>>();
@@ -65,17 +73,20 @@ namespace Service
                     Ticket ticket = new Ticket();
                     ticket.Connection = x;
                     ticket.User = _user;
-                    
 
                     if (x.AvailableSeatNo != 0) ticket.Seat = x.AvailableSeatNo;
                     else ticket.Seat = -1;
 
                     x.AvailableSeatNo--;
-                    u.UsersRepository.Attach(_user);
+
+                    
+        
                     u.TicketsRepository.Add(ticket);
+                    u.UsersRepository.Attach(_user);
                     u.Save();
                     u.EndTransaction();
-
+                //var y=u.TicketsRepository.Find(p => p.User.Email == userName.ToLower()).ToList();
+                
                 return ticket.Seat;
             }
         }
@@ -107,8 +118,19 @@ namespace Service
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
-                return u.TicketsRepository.Find(p => p.User.Email == userName).ToList();
+                return u.TicketsRepository.Find(p => p.User.Email == userName.ToLower()).ToList();
+            }
+        }
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public Ticket AllUserTickets(string userName)
+        {
+            
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
+            {
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
                 
+                var x= u.TicketsRepository.Find(p => p.User.Email == userName.ToLower()).ToList().First();
+                return x;
             }
         }
     }

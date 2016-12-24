@@ -12,6 +12,8 @@ namespace Service.App_Data.Contracts
         List<Station> AllStations();
         [OperationContract]
         List<List<Connection>> FindConnection(Station departure, Station arrival, DateTime date);
+        [OperationContract]
+        int AllTickets();
     }
     [ServiceContract]
     public interface IReservationManagment:IReservationManagmentUnsecure
@@ -25,5 +27,8 @@ namespace Service.App_Data.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         List<Ticket> AllUserReservations(string userName);
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        Ticket AllUserTickets(string userName);
     }
 }
