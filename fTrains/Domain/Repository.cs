@@ -30,6 +30,7 @@ namespace Domain
         public void Delete(T entity)
         {
             _set.Remove(entity);
+            
         }
 
         public IEnumerable<T> Find(Func<T, bool> predicate, params Expression<Func<T, object>>[] includes)

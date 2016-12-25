@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using DomainModel.Models;
+using System.Runtime.Serialization;
 
 namespace Service.App_Data.Contracts
 {
+   
     [ServiceContract]
     public interface IReservationManagmentUnsecure
     {
@@ -12,8 +14,7 @@ namespace Service.App_Data.Contracts
         List<Station> AllStations();
         [OperationContract]
         List<List<Connection>> FindConnection(Station departure, Station arrival, DateTime date);
-        [OperationContract]
-        int AllTickets();
+        
     }
     [ServiceContract]
     public interface IReservationManagment:IReservationManagmentUnsecure
@@ -23,12 +24,10 @@ namespace Service.App_Data.Contracts
         int MakeReservation(Connection con, string userName);
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void DeleteReservation(string userName, Connection con);
+        void DeleteReservation(string userName, Ticket t);
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         List<Ticket> AllUserReservations(string userName);
-        [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        Ticket AllUserTickets(string userName);
+        
     }
 }
