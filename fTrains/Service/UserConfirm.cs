@@ -12,6 +12,11 @@ namespace Service
     public class UserConfirm:UserNamePasswordValidator
     {
        
+        public UserConfirm()
+        {
+            if(Bootstrap.Container==null)
+            Bootstrap.BuildContainer();
+        }
         public override void Validate(string userName, string password)
         {
             List<User> s;
