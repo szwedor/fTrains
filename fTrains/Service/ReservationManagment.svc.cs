@@ -77,7 +77,7 @@ namespace Service
                     {
                         var connectons = u.ConnectionDefinitionRepository.Find(p => p.IsArchival != true &&
                                                                                   p.Departure.Id == city.Id,
-                                                                                  p => p.Departure).Select(p => p.Id).ToList();
+                                                                                  p => p.Departure,p=>p.Arrival).Select(p => p.Id).ToList();
 
                         oneconn = u.ConnectionsRepository.Find((t) => connectons.Contains(t.ConnectionDefinition.Id) &&
                                                                         t.DepartureTime > date && t.DepartureTime < dend).ToList();
@@ -90,13 +90,15 @@ namespace Service
                         }
                     }
                     var path = g.shortest_path(departure.Name, arrival.Name);
+                    
                     if (path != null)
                     {
-                       for (int i = 0; i < path.Count(); i++)
+                        path.Add(departure.Name);
+                       for (int i = 0; i < path.Count()-1; i++)
                         {
-                            if (path.ElementAt(i) == arrival.Name) break;
-                            Station from = u.StationsRepository.Find(p => p.Name == path.ElementAt(i)).ToList().First();
-                            Station to = u.StationsRepository.Find(p => p.Name == path.ElementAt(i+1)).ToList().First();
+                         //  if (path.ElementAt(i) == departure.Name) break;
+                            Station to = u.StationsRepository.Find(p => p.Name == path.ElementAt(i)).ToList().First();
+                            Station from = u.StationsRepository.Find(p => p.Name == path.ElementAt(i+1)).ToList().First();
 
                             var connectons = u.ConnectionDefinitionRepository.Find(p => p.IsArchival != true &&
                                                                                       p.Departure.Id == from.Id &&
