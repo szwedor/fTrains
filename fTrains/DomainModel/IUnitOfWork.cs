@@ -10,6 +10,7 @@ namespace DomainModel
     public interface IUnitOfWork : IDisposable
     {
         IRepository<Connection> ConnectionsRepository { get; }
+        IRepository<Models.Attribute> AttributesRepository { get; }
         IRepository<ConnectionDefinition> ConnectionDefinitionRepository { get; }
         IRepository<Station> StationsRepository { get; }
         IRepository<Train> TrainsRepository { get; }

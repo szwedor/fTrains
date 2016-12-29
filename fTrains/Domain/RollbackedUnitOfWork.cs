@@ -65,6 +65,14 @@ namespace Domain
 
         public IRepository<Ticket> TicketsRepository => _ticketsRepository.Value;
 
+        public IRepository<DomainModel.Models.Attribute> AttributesRepository
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public void Rollback()
         {
            _trx.Rollback();

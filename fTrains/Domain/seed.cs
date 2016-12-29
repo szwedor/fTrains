@@ -22,7 +22,9 @@ namespace Domain
 
         public static void Seed(TrainContext cont)
         {
-            
+            cont.Attributes.Add(new DomainModel.Models.Attribute() { Key = "AdminLogin", Value = "admin@admin.pl" });
+            cont.Attributes.Add(new DomainModel.Models.Attribute() { Key = "AdminPassword", Value = GetStringSha256Hash("Admin1") });
+
             {
                 User[] users =
                 {
@@ -34,15 +36,16 @@ namespace Domain
                         PhoneNo = "0700888008",
                         PassWord = GetStringSha256Hash("User1")
                     },
-                    new User
-                    {
-                        FirstName = "Admin",
-                        LastName = "Admin",
-                        Email = "admin@admin.pl",
-                        PhoneNo = "admin",
-                        PassWord = GetStringSha256Hash("Admin1")
-                    }
+                    //new User
+                    //{
+                    //    FirstName = "Admin",
+                    //    LastName = "Admin",
+                    //    Email = "admin@admin.pl",
+                    //    PhoneNo = "admin",
+                    //    PassWord = GetStringSha256Hash("Admin1")
+                    //}
                 };
+                
                 Train[] trainsNames =
                 {
                     new Train() {Name = "Kościuszko", SeatNo = 255 ,IsArchival = false},
@@ -128,14 +131,14 @@ namespace Domain
                     random = new Random();
                     int min = random.Next(60);
                     int hh = random.Next(24);
-                    int days = random.Next(7);
+                    int days = 0;
                     DateTime dep = DateTime.Now.AddMinutes(min).AddDays(days).AddHours(hh);
                     con.IsArchival = false;
-                    for (int i = 0; i < 52; i++)
+                    for (int i = 0; i < 30; i++)
                     {
                         Connection c = new Connection();
                         c.ConnectionDefinition = con;
-                        c.DepartureTime = dep.AddDays(7 * i);
+                        c.DepartureTime = dep.AddDays(i);
                         c.ArrivalTime = c.DepartureTime.Add(con.TravelTime);
 
                         c.AvailableSeatNo = con.Train.SeatNo;

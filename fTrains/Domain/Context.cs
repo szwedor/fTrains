@@ -16,6 +16,7 @@ namespace Domain
             context.Configuration.AutoDetectChangesEnabled = true;
             context.Configuration.ValidateOnSaveEnabled = true;
 
+
         }
     }
     public class TrainContext : DbContext
@@ -23,11 +24,11 @@ namespace Domain
 
         public TrainContext() : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Trains.mdf;Integrated Security=True")
         {
-            //Configuration.AutoDetectChangesEnabled = false;
-            //Configuration.ValidateOnSaveEnabled = false;
+            Configuration.AutoDetectChangesEnabled = false;
+            Configuration.ValidateOnSaveEnabled = false;
+               Database.SetInitializer<TrainContext>(new Init());
             var ensureDllIsCopied =
                 System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-               Database.SetInitializer<TrainContext>(new Init());
             //    Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
 
         }
@@ -59,6 +60,7 @@ namespace Domain
         }
 
         public DbSet<Connection> Connections { get; set; }
+        public DbSet<Attribute> Attributes { get; set; }
         public DbSet<ConnectionDefinition> ConnectionDefinitions { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Ticket> Tickets { get; set; }

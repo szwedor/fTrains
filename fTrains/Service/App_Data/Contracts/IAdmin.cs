@@ -47,6 +47,6 @@ namespace Service.App_Data.Contracts
             bool AddNewConnections(ConnectionDefinition connectionDefinition, DateTime value, DateTime dateTime,
                 int days, int h, int m);
 
-
-        }
+        //
+    }
 }

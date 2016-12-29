@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Attribute.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\ConnectionDefinition.cs" />
     <Compile Include="Entity.cs" />

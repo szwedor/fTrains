@@ -17,8 +17,9 @@ namespace Domain
         private readonly Lazy<IRepository<Train>> _trainsRepository;
         private readonly Lazy<IRepository<User>> _usersRepository;
         private readonly Lazy<IRepository<Ticket>> _ticketsRepository;
+        private readonly Lazy<IRepository<DomainModel.Models.Attribute>> _attributesRepository;
 
-        public UnitOfWork(Lazy<IRepository<Connection>> connectionsRepository, Lazy<IRepository<ConnectionDefinition>> connectionDefinitionRepository, Lazy<IRepository<Station>> stationsRepository, Lazy<IRepository<Train>> trainsRepository, Lazy<IRepository<User>> usersRepository, Lazy<IRepository<Ticket>> ticketsRepository)
+        public UnitOfWork(Lazy<IRepository<Connection>> connectionsRepository, Lazy<IRepository<ConnectionDefinition>> connectionDefinitionRepository, Lazy<IRepository<Station>> stationsRepository, Lazy<IRepository<Train>> trainsRepository, Lazy<IRepository<User>> usersRepository, Lazy<IRepository<Ticket>> ticketsRepository, Lazy<IRepository<DomainModel.Models.Attribute>> attributesRepository)
         {
             Context = new TrainContext();
             _connectionsRepository = connectionsRepository;
@@ -27,7 +28,7 @@ namespace Domain
             _trainsRepository = trainsRepository;
             _usersRepository = usersRepository;
             _ticketsRepository = ticketsRepository;
-
+            _attributesRepository = attributesRepository;
           
         }
 
@@ -64,6 +65,9 @@ namespace Domain
         public IRepository<User> UsersRepository => _usersRepository.Value;
 
         public IRepository<Ticket> TicketsRepository => _ticketsRepository.Value;
+        public IRepository<DomainModel.Models.Attribute> AttributesRepository => _attributesRepository.Value;
+
+      
 
         public void Rollback()
         {
