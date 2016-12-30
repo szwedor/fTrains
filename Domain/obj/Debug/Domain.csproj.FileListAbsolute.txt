@@ -1,0 +1,17 @@
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\Trains.mdf
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\Trains_log.ldf
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\App.config
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\Autofac.dll
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\DomainModel.dll
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\EntityFramework.dll
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\DomainModel.pdb
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\Autofac.xml
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\EntityFramework.xml
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\obj\Debug\Domain.dll
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\obj\Debug\Domain.pdb
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\Domain.dll.config
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\Domain.dll
+C:\Users\Szwed\Downloads\fTrains-master\fTrains\Domain\bin\Debug\Domain.pdb
