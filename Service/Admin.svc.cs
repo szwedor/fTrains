@@ -70,7 +70,7 @@ namespace Service
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
-                s = u.ConnectionDefinitionRepository.Find(p => p.Id > 0).ToList();
+                s = u.ConnectionDefinitionRepository.Find(p => p.Id > 0 ).ToList();
 
             }
             return s;
@@ -131,6 +131,7 @@ namespace Service
                     u.StationsRepository.Attach(cd.Departure);
                     u.ConnectionDefinitionRepository.Attach(cd);
                     cd.IsArchival = true;
+                    u.MakeModified(cd);
                     u.StationsRepository.Attach(cdl.Arrival);
                     u.StationsRepository.Attach(cdl.Departure);
                     u.TrainsRepository.Attach(cd.Train);
