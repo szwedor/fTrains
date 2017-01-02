@@ -48,7 +48,7 @@ namespace Service
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
                 DateTime dend = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
 
-                var cd = u.ConnectionDefinitionRepository.Find(p => p.IsArchival != true &&
+                var cd = u.ConnectionDefinitionRepository.Find(p => 
                                                                                  p.Departure.Id == departure.Id &&
                                                                                  p.Arrival.Id == arrival.Id, p => p.Departure,
                         p => p.Arrival).Select(p => p.Id).ToList();
