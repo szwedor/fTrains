@@ -40,7 +40,7 @@ namespace Service.App_Data.Contracts
         List<ConnectionDefinition> AllConnections();
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        bool UpdateConnection(ConnectionDefinition cd);
+        bool UpdateConnection(ConnectionDefinition cd,Station d,Station a,int p,TimeSpan ts);
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         bool MakeArchival(ConnectionDefinition cd);

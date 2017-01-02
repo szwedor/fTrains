@@ -121,17 +121,24 @@ namespace Service
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        public bool UpdateConnection(ConnectionDefinition cd)
+        public bool UpdateConnection(ConnectionDefinition cd, Station d, Station a, int p,TimeSpan ts)
         {
+            if (cd.Arrival.Id == cd.Departure.Id) return false;
+
+            if (cd.Arrival.Id == a.Id) a = cd.Arrival;
+            if (cd.Departure.Id == d.Id) d = cd.Departure;
+
+            if (cd.Departure.Id == a.Id) a = cd.Departure;
+            if (cd.Arrival.Id == d.Id) d = cd.Arrival;
             ConnectionDefinition cdl = new ConnectionDefinition()
             {
-                Arrival = cd.Arrival,
-                Departure = cd.Departure,
+                Arrival = a,
+                Departure = d,
                 IsArchival = false,
-                Name = cd.Departure.Name + " " + cd.Arrival.Name,
-                Price = cd.Price,
+                Name = d.Name + " " + a.Name,
+                Price = p,
                 Train = cd.Train,
-                TravelTime = cd.TravelTime
+                TravelTime = ts
             };
 
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
@@ -140,12 +147,13 @@ namespace Service
                 u.StartTransaction();
                 {
 
-                    u.StationsRepository.Attach(cd.Arrival);
-                    u.StationsRepository.Attach(cd.Departure);
-                    cd=u.ConnectionDefinitionRepository.Find(p => p.Id == cd.Id).ToList()[0];
+                    //u.StationsRepository.Attach(cd.Arrival);
+                    //u.StationsRepository.Attach(cd.Departure);
                     cd.IsArchival = true;
                     u.MakeModified(cd);
+                    if(cd.Arrival.Id!=cdl.Arrival.Id)
                     u.StationsRepository.Attach(cdl.Arrival);
+                    if(cd.Departure.Id!=cdl.Departure.Id)
                     u.StationsRepository.Attach(cdl.Departure);
                     u.TrainsRepository.Attach(cdl.Train);
                     u.ConnectionDefinitionRepository.Add(cdl);
