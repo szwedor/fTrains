@@ -75,6 +75,19 @@ namespace Service
             }
             return s;
         }
+
+
+        public List<Station> AllStationsButActive()
+        {
+            List<ConnectionDefinition> s;
+            using (var scope = Bootstrap.Container.BeginLifetimeScope())
+            {
+                IUnitOfWork u = scope.Resolve<IUnitOfWork>();
+                s = u.ConnectionDefinitionRepository.Find(p => p.Id > 0 && !p.IsArchival).ToList();
+
+            }
+            return s;
+        }
         public List<ConnectionDefinition> Find(Station departure, Station arrival, int price, int hour)
         {
             List<ConnectionDefinition> cd;
@@ -293,7 +306,6 @@ namespace Service
         
         }
 
-      
     }
 }
 

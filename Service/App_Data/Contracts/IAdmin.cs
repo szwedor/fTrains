@@ -15,6 +15,9 @@ namespace Service.App_Data.Contracts
         List<Station> AllStations();
 
         [OperationContract]
+        List<Station> AllStationsButActive();
+
+        [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]// bo na bazie
         Station Add(string newStationText);
 
