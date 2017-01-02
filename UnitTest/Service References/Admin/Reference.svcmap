@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="333063fa-0325-421b-bbaf-b402e0a5ec91" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://iliketrainssomuch.azurewebsites.net/Admin.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Admin.disco" MetadataType="Disco" ID="2d9560dd-cb10-4585-97bc-c04cde0d17da" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/Admin.svc?disco" />
+    <MetadataFile FileName="Admin.xsd" MetadataType="Schema" ID="0d89bcc5-4dfb-44dd-b5e6-c36d944e6544" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd3" />
+    <MetadataFile FileName="Admin1.xsd" MetadataType="Schema" ID="1838bc3c-1a52-477c-8452-00d0ccc38bbe" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd2" />
+    <MetadataFile FileName="Admin.wsdl" MetadataType="Wsdl" ID="21f0b056-8f72-4a00-b66f-488542a50513" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/Admin.svc?wsdl" />
+    <MetadataFile FileName="Admin2.xsd" MetadataType="Schema" ID="943c43e0-16db-4cc6-ba54-e14bb9f8f2bf" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd0" />
+    <MetadataFile FileName="Admin3.xsd" MetadataType="Schema" ID="e4f64d16-2c9c-479f-8779-9bc506cd9a13" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

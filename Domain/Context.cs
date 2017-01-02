@@ -5,7 +5,7 @@ using DomainModel.Models;
 
 namespace Domain
 {
-    public class Init : DropCreateDatabaseIfModelChanges<TrainContext>
+    public class Init : CreateDatabaseIfNotExists<TrainContext>
     {
         protected override void Seed(TrainContext context)
         {
@@ -26,8 +26,10 @@ namespace Domain
             base("Server=tcp:trains.database.windows.net,1433;Initial Catalog=trains;Persist Security Info=False;User ID=szwedor;Password=lollollol9!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
       // public TrainContext() : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Trains.mdf;Integrated Security=True")
         {
+           
             Configuration.AutoDetectChangesEnabled = false;
             Configuration.ValidateOnSaveEnabled = false;
+          //  Domain.seed.Seed(this);
                Database.SetInitializer<TrainContext>(new Init());
             var ensureDllIsCopied =
                 System.Data.Entity.SqlServer.SqlProviderServices.Instance;

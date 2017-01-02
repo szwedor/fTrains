@@ -30,7 +30,7 @@ namespace Service.App_Data.Contracts
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        bool AddNewConnection(Station departureStation, Station arrivalStation, int valueHour, int valueMinute, int price, string name);
+        bool AddNewConnection(Station departureStation, Station arrivalStation, int valueHour, int valueMinute, int price,string name);
         [OperationContract]
         List<ConnectionDefinition> Find(Station departure, Station arrival, int price, int hour);
         [OperationContract]

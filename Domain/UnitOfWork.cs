@@ -67,7 +67,7 @@ namespace Domain
         public IRepository<Ticket> TicketsRepository => _ticketsRepository.Value;
         public IRepository<DomainModel.Models.Attribute> AttributesRepository => _attributesRepository.Value;
 
-      
+    
 
         public void Rollback()
         {
@@ -88,6 +88,11 @@ namespace Domain
             _trx=Context.Database.BeginTransaction();
                 _lvl++;
             
+        }
+
+        public void MakeModified(Entity e)
+        {
+            Context.Entry(e).State = EntityState.Modified;
         }
     }
 }

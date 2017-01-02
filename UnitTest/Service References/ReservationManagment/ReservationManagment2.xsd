@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DomainModel.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DomainModel.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DomainModel" />
+  <xs:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" nillable="true" type="tns:Station" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStation" nillable="true" type="tns:ArrayOfStation" />
+  <xs:complexType name="Station">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/DomainModel" base="q1:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsArchival" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Station" nillable="true" type="tns:Station" />
+  <xs:complexType name="ArrayOfArrayOfConnection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfConnection" nillable="true" type="tns:ArrayOfConnection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArrayOfConnection" nillable="true" type="tns:ArrayOfArrayOfConnection" />
+  <xs:complexType name="ArrayOfConnection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Connection" nillable="true" type="tns:Connection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConnection" nillable="true" type="tns:ArrayOfConnection" />
+  <xs:complexType name="Connection">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/DomainModel" base="q2:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ArrivalTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="AvailableSeatNo" type="xs:int" />
+          <xs:element minOccurs="0" name="ConnectionDefinition" nillable="true" type="tns:ConnectionDefinition" />
+          <xs:element minOccurs="0" name="DepartureTime" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Connection" nillable="true" type="tns:Connection" />
+  <xs:complexType name="ConnectionDefinition">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/DomainModel" base="q3:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Arrival" nillable="true" type="tns:Station" />
+          <xs:element minOccurs="0" name="Departure" nillable="true" type="tns:Station" />
+          <xs:element minOccurs="0" name="IsArchival" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Price" type="xs:int" />
+          <xs:element minOccurs="0" name="Train" nillable="true" type="tns:Train" />
+          <xs:element minOccurs="0" name="TravelTime" type="ser:duration" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConnectionDefinition" nillable="true" type="tns:ConnectionDefinition" />
+  <xs:complexType name="Train">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/DomainModel" base="q4:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsArchival" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SeatNo" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Train" nillable="true" type="tns:Train" />
+  <xs:complexType name="Ticket">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/DomainModel" base="q5:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Connection" nillable="true" type="tns:Connection" />
+          <xs:element minOccurs="0" name="Seat" type="xs:int" />
+          <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Ticket" nillable="true" type="tns:Ticket" />
+  <xs:complexType name="User">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/DomainModel" base="q6:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PassWord" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfTicket">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Ticket" nillable="true" type="tns:Ticket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTicket" nillable="true" type="tns:ArrayOfTicket" />
+</xs:schema>

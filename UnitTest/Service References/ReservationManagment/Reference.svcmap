@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5d882ea0-3042-4d77-aee6-5822d100b5e9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ReservationManagment.xsd" MetadataType="Schema" ID="55c69d4c-a77e-49e7-aa57-03ce78ef1d7b" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?xsd=xsd3" />
+    <MetadataFile FileName="ReservationManagment1.xsd" MetadataType="Schema" ID="960db446-40c1-458f-8207-00240a8111c3" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?xsd=xsd0" />
+    <MetadataFile FileName="ReservationManagment.wsdl" MetadataType="Wsdl" ID="6d49e0c2-7c87-4ee6-86b0-7b5f59715dc7" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?wsdl" />
+    <MetadataFile FileName="ReservationManagment2.xsd" MetadataType="Schema" ID="9a8704a9-8b5a-4348-b60e-be430b9e17a8" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?xsd=xsd2" />
+    <MetadataFile FileName="ReservationManagment3.xsd" MetadataType="Schema" ID="ac218190-52de-4013-bc98-d84056db8ce9" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?xsd=xsd1" />
+    <MetadataFile FileName="ReservationManagment.disco" MetadataType="Disco" ID="b778e3d4-7813-4306-8c8d-3a1e50ad95ac" SourceId="1" SourceUrl="http://iliketrainssomuch.azurewebsites.net/ReservationManagment.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

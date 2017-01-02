@@ -10,3 +10,15 @@ C:\Users\Szwed\Downloads\fTrains-master\fTrains\DomainModel\bin\Release\EntityFr
 C:\Users\Szwed\Downloads\fTrains-master\fTrains\DomainModel\obj\Release\DomainModel.csprojResolveAssemblyReference.cache
 C:\Users\Szwed\Downloads\fTrains-master\fTrains\DomainModel\obj\Release\DomainModel.dll
 C:\Users\Szwed\Downloads\fTrains-master\fTrains\DomainModel\obj\Release\DomainModel.pdb
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\DomainModel.dll.config
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\DomainModel.dll
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\DomainModel.pdb
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\Autofac.dll
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\EntityFramework.dll
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\Autofac.xml
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\EntityFramework.xml
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\obj\Release\DomainModel.csprojResolveAssemblyReference.cache
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\obj\Release\DomainModel.dll
+C:\Users\Szwed\Source\Repos\fTrains\DomainModel\obj\Release\DomainModel.pdb

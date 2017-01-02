@@ -93,5 +93,10 @@ namespace Domain
                 _lvl++;
             
         }
+
+        public void MakeModified(Entity e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

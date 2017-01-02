@@ -25,6 +25,7 @@ namespace Domain
         public void Attach(T entity)
         {
             _set.Attach(entity);
+            
         }
 
         public void Delete(T entity)

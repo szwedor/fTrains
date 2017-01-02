@@ -2,8 +2,8 @@
 {
     public class Train:Entity
     {
-        public virtual string Name { get; set; }
-        public virtual int SeatNo { get; set; }
+        public string Name { get; set; }
+        public int SeatNo { get; set; }
         public bool IsArchival { get; set; }
     }
 }

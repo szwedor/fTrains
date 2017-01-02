@@ -91,6 +91,8 @@ namespace Service
                 u.StartTransaction();
                 u.UsersRepository.Attach(_user);
                 _user.PassWord = hashpass;
+
+                u.MakeModified(_user);
                 u.Save();
                 u.EndTransaction();
             }

@@ -17,6 +17,7 @@ namespace DomainModel
         IRepository<User> UsersRepository { get; }
         IRepository<Ticket> TicketsRepository { get; }
         void Rollback();
+        void MakeModified(Entity e);
         void Save();
         void EndTransaction();
         void StartTransaction();

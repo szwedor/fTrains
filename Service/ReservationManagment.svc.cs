@@ -24,6 +24,7 @@ namespace Service
 
         public List<Station> AllStations()
         {
+            
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
             {
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
@@ -69,10 +70,13 @@ namespace Service
                     timeon.Add(s.Id, DateTime.MaxValue);
                     outgoing.Add(s.Id, new List<Connection>());
                 }
+                if (!timeon.ContainsKey(departure.Id)) return null;
                 timeon[departure.Id] = date;
 
 
-                foreach (var c in c_list)
+               
+
+                    foreach (var c in c_list)
                     outgoing[c.ConnectionDefinition.Departure.Id].Add(c);
 
 

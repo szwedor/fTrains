@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DomainModel.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DomainModel.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DomainModel" />
+  <xs:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" nillable="true" type="tns:Station" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStation" nillable="true" type="tns:ArrayOfStation" />
+  <xs:complexType name="Station">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/DomainModel" base="q1:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsArchival" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Station" nillable="true" type="tns:Station" />
+  <xs:complexType name="ArrayOfConnectionDefinition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConnectionDefinition" nillable="true" type="tns:ConnectionDefinition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConnectionDefinition" nillable="true" type="tns:ArrayOfConnectionDefinition" />
+  <xs:complexType name="ConnectionDefinition">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/DomainModel" base="q2:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Arrival" nillable="true" type="tns:Station" />
+          <xs:element minOccurs="0" name="Departure" nillable="true" type="tns:Station" />
+          <xs:element minOccurs="0" name="IsArchival" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Price" type="xs:int" />
+          <xs:element minOccurs="0" name="Train" nillable="true" type="tns:Train" />
+          <xs:element minOccurs="0" name="TravelTime" type="ser:duration" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConnectionDefinition" nillable="true" type="tns:ConnectionDefinition" />
+  <xs:complexType name="Train">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/DomainModel" base="q3:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsArchival" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SeatNo" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Train" nillable="true" type="tns:Train" />
+</xs:schema>

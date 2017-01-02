@@ -32,13 +32,14 @@ namespace Service
         }
         [OperationBehavior(TransactionScopeRequired = true)]
 
-        public bool AddNewConnection(Station departureStation, Station arrivalStation, int valueHour, int valueMinute, int price, string name)
+        public bool AddNewConnection(Station departureStation, Station arrivalStation, int valueHour, int valueMinute, int price,string s)
         {
+
             var ConnectionDefinition = new ConnectionDefinition()
             {
                 Departure = departureStation,
                 Arrival = arrivalStation,
-                Name = name,
+                Name = s,
                 IsArchival = false,
                 Price = price,
                 TravelTime = new TimeSpan(0, valueHour, valueMinute, 0)
@@ -50,7 +51,10 @@ namespace Service
                 u.StartTransaction();
                 {
                     //Dodanie pociągu jest niezdefinowane w wymaganiach wieć na razie każde połącznie korzysta z pierwszego;
-                    ConnectionDefinition.Train = u.TrainsRepository.Get(p => p.Id == 1);
+
+                    //    u.TrainsRepository.Add(new Train() { Name = "Super", SeatNo = 100 });
+                    ConnectionDefinition.Train =
+                    u.TrainsRepository.Find(p => true).ToList()[0];
                     u.StationsRepository.Attach(departureStation);
                     u.StationsRepository.Attach(arrivalStation);
                     u.ConnectionDefinitionRepository.Add(ConnectionDefinition);
@@ -151,6 +155,8 @@ namespace Service
                     u.ConnectionDefinitionRepository.Attach(cd);
                     cd.IsArchival = true;
                     u.TrainsRepository.Attach(cd.Train);
+
+                    u.MakeModified(cd);
                     u.Save();
                     u.EndTransaction();
                 }
@@ -227,6 +233,20 @@ namespace Service
                 if (text.Length == 0) return false;
                 u.StationsRepository.Attach(station);
                 station.Name = text;
+
+                u.MakeModified(station);
+                {
+                    List < ConnectionDefinition > cd =
+                        u.ConnectionDefinitionRepository.Find(
+                            p => p.IsArchival == false && (p.Arrival == station || p.Departure == station)).ToList();
+                    foreach(var c in cd)
+                    {
+                        c.Name=c.Departure.Name+" "+c.Arrival.Name;
+
+                        u.MakeModified(c);
+                    }
+
+                }
                 u.Save();
                 u.EndTransaction();
 
@@ -244,8 +264,10 @@ namespace Service
                 IUnitOfWork u = scope.Resolve<IUnitOfWork>();
                 u.StartTransaction();
 
-                u.StationsRepository.Attach(station);
-                station.IsArchival = archivalChecked;
+                //station.IsArchival = true;
+                var s=u.StationsRepository.Find(p => p.Id == station.Id).ToList()[0];
+                s.IsArchival = archivalChecked;
+                u.MakeModified(s);
                 if (archivalChecked)
                 {
                     List<ConnectionDefinition> cd =
@@ -254,6 +276,7 @@ namespace Service
                     foreach (var x in cd)
                     {
                         x.IsArchival = true;
+                        u.MakeModified(x);
                     }
                 }
                 u.Save();

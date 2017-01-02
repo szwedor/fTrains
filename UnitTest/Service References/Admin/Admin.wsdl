@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Admin" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IAdmin_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:SecureConversationToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:BootstrapPolicy>
+                  <wsp:Policy>
+                    <sp:SignedParts>
+                      <sp:Body />
+                      <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                    </sp:SignedParts>
+                    <sp:EncryptedParts>
+                      <sp:Body />
+                    </sp:EncryptedParts>
+                    <sp:TransportBinding>
+                      <wsp:Policy>
+                        <sp:TransportToken>
+                          <wsp:Policy>
+                            <sp:HttpsToken RequireClientCertificate="false" />
+                          </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                          <wsp:Policy>
+                            <sp:Basic256 />
+                          </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                          <wsp:Policy>
+                            <sp:Strict />
+                          </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp />
+                      </wsp:Policy>
+                    </sp:TransportBinding>
+                    <sp:SignedSupportingTokens>
+                      <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                          <wsp:Policy>
+                            <sp:WssUsernameToken10 />
+                          </wsp:Policy>
+                        </sp:UsernameToken>
+                      </wsp:Policy>
+                    </sp:SignedSupportingTokens>
+                    <sp:Wss11>
+                      <wsp:Policy />
+                    </sp:Wss11>
+                    <sp:Trust10>
+                      <wsp:Policy>
+                        <sp:MustSupportIssuedTokens />
+                        <sp:RequireClientEntropy />
+                        <sp:RequireServerEntropy />
+                      </wsp:Policy>
+                    </sp:Trust10>
+                  </wsp:Policy>
+                </sp:BootstrapPolicy>
+              </wsp:Policy>
+            </sp:SecureConversationToken>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy />
+        </sp:Wss11>
+        <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust10>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DomainModel.Models" />
+      <xsd:import schemaLocation="http://iliketrainssomuch.azurewebsites.net/Admin.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DomainModel" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAdmin_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AllStations_InputMessage">
+    <wsdl:part name="parameters" element="tns:AllStations" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AllStations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AllStationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_Add_InputMessage">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_Add_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_ChangeStation_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStation" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_ChangeStation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_ChangeStation2_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStation2" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_ChangeStation2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStation2Response" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AddNewConnection_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewConnection" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AddNewConnection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_Find_InputMessage">
+    <wsdl:part name="parameters" element="tns:Find" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_Find_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AllConnections_InputMessage">
+    <wsdl:part name="parameters" element="tns:AllConnections" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AllConnections_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AllConnectionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_UpdateConnection_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateConnection" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_UpdateConnection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_MakeArchival_InputMessage">
+    <wsdl:part name="parameters" element="tns:MakeArchival" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_MakeArchival_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MakeArchivalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AddNewConnections_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewConnections" />
+  </wsdl:message>
+  <wsdl:message name="IAdmin_AddNewConnections_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewConnectionsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAdmin">
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/Login" message="tns:IAdmin_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/LoginResponse" message="tns:IAdmin_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AllStations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/AllStations" message="tns:IAdmin_AllStations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/AllStationsResponse" message="tns:IAdmin_AllStations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/Add" message="tns:IAdmin_Add_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/AddResponse" message="tns:IAdmin_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/ChangeStation" message="tns:IAdmin_ChangeStation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/ChangeStationResponse" message="tns:IAdmin_ChangeStation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStation2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/ChangeStation2" message="tns:IAdmin_ChangeStation2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/ChangeStation2Response" message="tns:IAdmin_ChangeStation2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewConnection">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/AddNewConnection" message="tns:IAdmin_AddNewConnection_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/AddNewConnectionResponse" message="tns:IAdmin_AddNewConnection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/Find" message="tns:IAdmin_Find_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/FindResponse" message="tns:IAdmin_Find_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AllConnections">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/AllConnections" message="tns:IAdmin_AllConnections_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/AllConnectionsResponse" message="tns:IAdmin_AllConnections_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateConnection">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/UpdateConnection" message="tns:IAdmin_UpdateConnection_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/UpdateConnectionResponse" message="tns:IAdmin_UpdateConnection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MakeArchival">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/MakeArchival" message="tns:IAdmin_MakeArchival_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/MakeArchivalResponse" message="tns:IAdmin_MakeArchival_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewConnections">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdmin/AddNewConnections" message="tns:IAdmin_AddNewConnections_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdmin/AddNewConnectionsResponse" message="tns:IAdmin_AddNewConnections_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IAdmin" type="tns:IAdmin">
+    <wsp:PolicyReference URI="#WSHttpBinding_IAdmin_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllStations">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/AllStations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/Add" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStation">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/ChangeStation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStation2">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/ChangeStation2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewConnection">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/AddNewConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/Find" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllConnections">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/AllConnections" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateConnection">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/UpdateConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeArchival">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/MakeArchival" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewConnections">
+      <soap12:operation soapAction="http://tempuri.org/IAdmin/AddNewConnections" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Admin">
+    <wsdl:port name="WSHttpBinding_IAdmin" binding="tns:WSHttpBinding_IAdmin">
+      <soap12:address location="https://iliketrainssomuch.azurewebsites.net/Admin.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://iliketrainssomuch.azurewebsites.net/Admin.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
