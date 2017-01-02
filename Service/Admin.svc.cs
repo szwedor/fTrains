@@ -77,7 +77,7 @@ namespace Service
         }
 
 
-        public List<Station> AllStationsButActive()
+        public List<ConnectionDefinition> AllConnectionsButActive()
         {
             List<ConnectionDefinition> s;
             using (var scope = Bootstrap.Container.BeginLifetimeScope())
@@ -142,12 +142,12 @@ namespace Service
 
                     u.StationsRepository.Attach(cd.Arrival);
                     u.StationsRepository.Attach(cd.Departure);
-                    u.ConnectionDefinitionRepository.Attach(cd);
+                    cd=u.ConnectionDefinitionRepository.Find(p => p.Id == cd.Id).ToList()[0];
                     cd.IsArchival = true;
                     u.MakeModified(cd);
                     u.StationsRepository.Attach(cdl.Arrival);
                     u.StationsRepository.Attach(cdl.Departure);
-                    u.TrainsRepository.Attach(cd.Train);
+                    u.TrainsRepository.Attach(cdl.Train);
                     u.ConnectionDefinitionRepository.Add(cdl);
                     u.Save();
                     u.EndTransaction();

@@ -15,7 +15,7 @@ namespace Service.App_Data.Contracts
         List<Station> AllStations();
 
         [OperationContract]
-        List<Station> AllStationsButActive();
+        List<ConnectionDefinition> AllConnectionsButActive();
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]// bo na bazie
